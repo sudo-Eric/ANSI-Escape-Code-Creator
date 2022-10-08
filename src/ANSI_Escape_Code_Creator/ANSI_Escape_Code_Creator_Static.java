@@ -388,8 +388,6 @@ public class ANSI_Escape_Code_Creator_Static {
         System.out.print(CSI + '6' + SGR);
     }
 
-    /////////
-
     /**
      * <p>Reverse video (invert)</p>
      * <p>Swap foreground and background colors; inconsistent emulation</p>
@@ -534,5 +532,307 @@ public class ANSI_Escape_Code_Creator_Static {
      */
     public static void SGR_not_crossed_out() {
         System.out.print(CSI + "29" + SGR);
+    }
+
+    /**
+     * <p>Set the foreground color</p>
+     * <p>Works with 4-bit, 8-bit, and 24-bit color modes</p>
+     * @param color Color
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_foreground_color(int color, int colorMode) {
+        if (colorMode == _4BIT_COLOR) {
+            if ((color > 29 && color < 38) || (color > 89 && color < 98)) {
+                System.out.print(CSI + color + SGR);
+            } else
+                System.out.println("ERROR: Unknown color " + color);
+        } else if (colorMode == _8BIT_COLOR) {
+            if (color > -1 && color < 256) {
+                System.out.print(CSI + "38;5;" + color + SGR);
+            } else
+                System.out.println("ERROR: Unknown color " + color);
+        } else {
+            System.out.print(CSI + "38;2;" +
+                    ((color >> 16) & 0xFF) + ';' +
+                    ((color >> 8) & 0xFF) + ';' +
+                    (color & 0xFF) + SGR);
+        }
+    }
+
+    /**
+     * <p>Set the foreground color</p>
+     * <p>Works with 4-bit and 24-bit color modes</p>
+     * @param color Color
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_foreground_color(String color, int colorMode) {
+        if (colorMode == _4BIT_COLOR) {
+            Integer c = _4bit_colors_foreground.get(color);
+            if (c != null)
+                System.out.print(CSI + c + SGR);
+        } else if (colorMode == _8BIT_COLOR) {
+            System.out.println("ERROR: 8-bit color can not be set by string");
+        } else {
+            if (color.length() == 7) {
+                if (color.charAt(0) == '#')
+                    color = color.substring(1);
+            }
+            if (color.length() == 6) {
+                try {
+                    int c = Integer.parseInt(color, 16);
+
+                    System.out.print(CSI + "38;2;" +
+                            ((c >> 16) & 0xFF) + ';' +
+                            ((c >> 8) & 0xFF) + ';' +
+                            (c & 0xFF) + SGR);
+                } catch (NumberFormatException e) {
+                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                }
+            } else {
+                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+            }
+        }
+    }
+
+    /**
+     * <p>Set the foreground color</p>
+     * <p>Works with 24-bit color mode only</p>
+     * @param r Color R
+     * @param g Color G
+     * @param b Color B
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_foreground_color(int r, int g, int b, int colorMode) {
+        if (colorMode == _24BIT_COLOR) {
+            if (r > -1 && g > -1 && b > -1 && r < 256 && g < 256 && b < 256) {
+                System.out.print(CSI + "38;2;" +
+                        (r & 0xFF) + ';' +
+                        (g & 0xFF) + ';' +
+                        (b & 0xFF) + SGR);
+            }
+            else
+                System.out.println("ERROR: Color values must be in range 0-255");
+        } else {
+            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+        }
+    }
+
+    /**
+     * Restore default foreground color
+     */
+    public static void SGR_default_foreground_color() {
+        System.out.print(CSI + "40" + SGR);
+    }
+
+    /**
+     * <p>Set the background color</p>
+     * <p>Works with 4-bit, 8-bit, and 24-bit color modes</p>
+     * @param color Color
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_background_color(int color, int colorMode) {
+        if (colorMode == _4BIT_COLOR) {
+            if ((color > 39 && color < 48) || (color > 99 && color < 108)) {
+                System.out.print(CSI + color + SGR);
+            } else
+                System.out.println("ERROR: Unknown color " + color);
+        } else if (colorMode == _8BIT_COLOR) {
+            if (color > -1 && color < 256) {
+                System.out.print(CSI + "48;5;" + color + SGR);
+            } else
+                System.out.println("ERROR: Unknown color " + color);
+        } else {
+            System.out.print(CSI + "48;2;" +
+                    ((color >> 16) & 0xFF) + ';' +
+                    ((color >> 8) & 0xFF) + ';' +
+                    (color & 0xFF) + SGR);
+        }
+    }
+
+    /**
+     * <p>Set the background color</p>
+     * <p>Works with 4-bit and 24-bit color modes</p>
+     * @param color Color
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_background_color(String color, int colorMode) {
+        if (colorMode == _4BIT_COLOR) {
+            Integer c = _4bit_colors_background.get(color);
+            if (c != null)
+                System.out.print(CSI + c + SGR);
+        } else if (colorMode == _8BIT_COLOR) {
+            System.out.println("ERROR: 8-bit color can not be set by string");
+        } else {
+            if (color.length() == 7) {
+                if (color.charAt(0) == '#')
+                    color = color.substring(1);
+            }
+            if (color.length() == 6) {
+                try {
+                    int c = Integer.parseInt(color, 16);
+
+                    System.out.print(CSI + "48;2;" +
+                            ((c >> 16) & 0xFF) + ';' +
+                            ((c >> 8) & 0xFF) + ';' +
+                            (c & 0xFF) + SGR);
+                } catch (NumberFormatException e) {
+                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                }
+            } else {
+                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+            }
+        }
+    }
+
+    /**
+     * <p>Set the background color</p>
+     * <p>Works with 24-bit color mode only</p>
+     * @param r Color R
+     * @param g Color G
+     * @param b Color B
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_background_color(int r, int g, int b, int colorMode) {
+        if (colorMode == _24BIT_COLOR) {
+            if (r > -1 && g > -1 && b > -1 && r < 256 && g < 256 && b < 256) {
+                System.out.print(CSI + "48;2;" +
+                        (r & 0xFF) + ';' +
+                        (g & 0xFF) + ';' +
+                        (b & 0xFF) + SGR);
+            }
+            else
+                System.out.println("ERROR: Color values must be in range 0-255");
+        } else {
+            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+        }
+    }
+
+    /**
+     * Restore default background color
+     */
+    public static void SGR_default_background_color() {
+        System.out.print(CSI + "49" + SGR);
+    }
+
+    /**
+     * Overlined
+     */
+    public static void SGR_overlined() {
+        System.out.print(CSI + "53" + SGR);
+    }
+
+    /**
+     * Not overlined
+     */
+    public static void SGR_not_overlined() {
+        System.out.print(CSI + "55" + SGR);
+    }
+
+    /**
+     * <p>Set the underline color</p>
+     * <p>Works with 8-bit and 24-bit color modes</p>
+     * @param color Color
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_underline_color(int color, int colorMode) {
+        if (colorMode == _4BIT_COLOR) {
+            System.out.println("ERROR: Underline color does not support 4-bit color");
+        } else if (colorMode == _8BIT_COLOR) {
+            if (color > -1 && color < 256) {
+                System.out.print(CSI + "58;5;" + color + SGR);
+            } else
+                System.out.println("ERROR: Unknown color " + color);
+        } else {
+            System.out.print(CSI + "58;2;" +
+                    ((color >> 16) & 0xFF) + ';' +
+                    ((color >> 8) & 0xFF) + ';' +
+                    (color & 0xFF) + SGR);
+        }
+    }
+
+    /**
+     * <p>Set the underline color</p>
+     * <p>Works with 4-bit color mode only</p>
+     * @param color Color
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_underline_color(String color, int colorMode) {
+        if (colorMode == _4BIT_COLOR) {
+            System.out.println("ERROR: Underline color does not support 4-bit color");
+        } else if (colorMode == _8BIT_COLOR) {
+            System.out.println("ERROR: 8-bit color can not be set by string");
+        } else {
+            if (color.length() == 7) {
+                if (color.charAt(0) == '#')
+                    color = color.substring(1);
+            }
+            if (color.length() == 6) {
+                try {
+                    int c = Integer.parseInt(color, 16);
+                    System.out.print(CSI + "48;2;" +
+                            ((c >> 16) & 0xFF) + ';' +
+                            ((c >> 8) & 0xFF) + ';' +
+                            (c & 0xFF) + SGR);
+                } catch (NumberFormatException e) {
+                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                }
+            } else {
+                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+            }
+        }
+    }
+
+    /**
+     * <p>Set the underline color</p>
+     * <p>Works with 24-bit color mode only</p>
+     * @param r Color R
+     * @param g Color G
+     * @param b Color B
+     * @param colorMode Color mode
+     */
+    public static void SGR_set_underline_color(int r, int g, int b, int colorMode) {
+        if (colorMode == _24BIT_COLOR) {
+            if (r > -1 && g > -1 && b > -1 && r < 256 && g < 256 && b < 256) {
+                System.out.print(CSI + "48;2;" +
+                        (r & 0xFF) + ';' +
+                        (g & 0xFF) + ';' +
+                        (b & 0xFF) + SGR);
+            }
+            else
+                System.out.println("ERROR: Color values must be in range 0-255");
+        } else {
+            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+        }
+    }
+
+    /**
+     * Restore default underline color
+     */
+    public static void SGR_default_underline_color() {
+        System.out.print(CSI + "59" + SGR);
+    }
+
+    /**
+     * <p>Superscript</p>
+     * <p>Implemented only in mintty</p>
+     */
+    public static void SGR_superscript() {
+        System.out.print(CSI + "73" + SGR);
+    }
+
+    /**
+     * <p>Subscript</p>
+     * <p>Implemented only in mintty</p>
+     */
+    public static void SGR_subscript() {
+        System.out.print(CSI + "74" + SGR);
+    }
+
+    /**
+     * <p>Neither superscript nor subscript</p>
+     * <p>Implemented only in mintty</p>
+     */
+    public static void SGR_normal_script() {
+        System.out.print(CSI + "75" + SGR);
     }
 }
