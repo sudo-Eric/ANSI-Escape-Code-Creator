@@ -1,3 +1,5 @@
+package ANSI_Escape_Code_Creator;
+
 import java.util.HashMap;
 
 /**

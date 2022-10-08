@@ -1,3 +1,6 @@
+import ANSI_Escape_Code_Creator.ANSI_Escape_Code_Creator;
+import static ANSI_Escape_Code_Creator.ANSI_Escape_Code_Creator_Static.*;
+
 /**
  * Class containing example code/uses for ANSI escape codes
  */
@@ -9,9 +12,10 @@ public class example {
      * @throws InterruptedException When Thread.sleep() throws an error
      */
     public static void main(String[] args) throws InterruptedException {
-        demo1();
-//        ANSI_Escape_Code_Creator gen = new ANSI_Escape_Code_Creator();
-//        gen.erase_display();
+//        demo1();
+        demo2();
+//        ANSI_Escape_Code_Creator.ANSI_Escape_Code_Creator gen = new ANSI_Escape_Code_Creator.ANSI_Escape_Code_Creator();
+//        gen.erase_display().cursor_position(1,1).SGR_bold();
 //
 //        System.out.println(gen.toEscapedString());
 //        System.out.println(gen);
@@ -53,5 +57,27 @@ public class example {
             Thread.sleep(100);
         }
         System.out.println("\n");
+    }
+
+    private static void demo2() throws InterruptedException {
+        erase_display();
+        cursor_position(1,1);
+        System.out.println("This is a test of the ANCI escape code control characters:");
+        System.out.println("This is some normal text.");
+        SGR_bold();
+        System.out.println("This is some bold text.");
+        SGR_clear();
+        SGR_italic();
+        System.out.println("This is some italic text.");
+        SGR_clear();
+        SGR_underline();
+        System.out.println("This is some underlined text.");
+        SGR_clear();
+        SGR_doubly_underlined();
+        System.out.println("This is some double underlined text.");
+        SGR_clear();
+        SGR_crossed_out();
+        System.out.println("This is some crossed out text.");
+        SGR_clear();
     }
 }
