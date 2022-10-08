@@ -30,7 +30,6 @@ public class ANSI_Escape_Code_Creator {
 
         System.out.println(gen);
 
-        System.out.println("\n\n\n\n\n\n\n");
         gen = new ANSI_Escape_Code_Creator();
         gen.cursor_position(28,1).append("\u2554");
         for (int i = 0; i < 100; i++)
@@ -143,6 +142,8 @@ public class ANSI_Escape_Code_Creator {
      */
     @Override
     public String toString() {
+        if (this._SGR)
+            this.end_SGR();
         return this.command.toString();
     }
 
@@ -151,6 +152,8 @@ public class ANSI_Escape_Code_Creator {
      * @return Escaped generated string
      */
     public String toEscapedString() {
+        if (this._SGR)
+            this.end_SGR();
         return toPrintableRepresentation(this.toString(), this.escape_mode, this.shorten_codes);
     }
 
