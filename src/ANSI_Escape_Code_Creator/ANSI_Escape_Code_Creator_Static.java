@@ -6,7 +6,7 @@ import java.util.HashMap;
  * A set of static functions to print ANSI escape codes for program use
  *
  * @author Eric Heinke (sudo-Eric)
- * @version 1.0.1
+ * @version 1.2.0
  */
 public class ANSI_Escape_Code_Creator_Static {
     /**
@@ -268,31 +268,49 @@ public class ANSI_Escape_Code_Creator_Static {
     }
 
     /**
-     * save cursor position (DEC) Device Control String
+     * <p>Save cursor position</p>
+     * <p>Save cursor position (DEC) Device Control String</p>
      */
     public static void cursor_save_position_DEC() {
         System.out.print("\0337");
     }
 
     /**
-     * restores the cursor to the last saved position (DEC) Device Control String
+     * <p>Restore cursor position</p>
+     * <p>Restores the cursor to the last saved position (DEC) Device Control String</p>
      */
     public static void cursor_restore_position_DEC() {
         System.out.print("\0338");
     }
 
     /**
-     * save cursor position (OSC) Operating System Command
+     * <p>Save cursor position</p>
+     * <p>Save cursor position (OSC) Operating System Command</p>
      */
     public static void cursor_save_position_OSC() {
         System.out.print(CSI + 's');
     }
 
     /**
-     * restores the cursor to the last saved position (SCO) Operating System Command
+     * <p>Restore cursor position</p>
+     * <p>Restores the cursor to the last saved position (SCO) Operating System Command</p>
      */
     public static void cursor_restore_position_OSC() {
         System.out.print(CSI + 'u');
+    }
+
+    /**
+     * Make cursor invisible
+     */
+    public static void cursor_invisible() {
+        System.out.print(CSI + "?25l");
+    }
+
+    /**
+     * Make cursor visible
+     */
+    public static void cursor_visible() {
+        System.out.print(CSI + "?25h");
     }
 
     /**

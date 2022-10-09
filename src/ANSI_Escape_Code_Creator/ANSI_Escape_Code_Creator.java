@@ -6,7 +6,7 @@ import java.util.HashMap;
  * A class to aid in the creation of strings that use ANSI escape codes
  *
  * @author Eric Heinke (sudo-Eric)
- * @version 1.0.1
+ * @version 1.2.0
  */
 public class ANSI_Escape_Code_Creator {
     /**
@@ -438,8 +438,8 @@ public class ANSI_Escape_Code_Creator {
     }
 
     /**
-     * save cursor position (DEC) Device Control String
-     * @return Self reference
+     * <p>Save cursor position</p>
+     * <p>Save cursor position (DEC) Device Control String</p>
      */
     public ANSI_Escape_Code_Creator cursor_save_position_DEC() {
         if (this._SGR)
@@ -449,7 +449,8 @@ public class ANSI_Escape_Code_Creator {
     }
 
     /**
-     * restores the cursor to the last saved position (DEC) Device Control String
+     * <p>Restore cursor position</p>
+     * <p>Restores the cursor to the last saved position (DEC) Device Control String</p>
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_restore_position_DEC() {
@@ -460,7 +461,8 @@ public class ANSI_Escape_Code_Creator {
     }
 
     /**
-     * save cursor position (OSC) Operating System Command
+     * <p>Save cursor position</p>
+     * <p>Save cursor position (OSC) Operating System Command</p>
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_save_position_OSC() {
@@ -469,11 +471,30 @@ public class ANSI_Escape_Code_Creator {
     }
 
     /**
-     * restores the cursor to the last saved position (SCO) Operating System Command
+     * <p>Restore cursor position</p>
+     * <p>Restores the cursor to the last saved position (SCO) Operating System Command</p>
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_restore_position_OSC() {
         createCSI('u');
+        return this;
+    }
+
+    /**
+     * Make cursor invisible
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator cursor_invisible() {
+        createCSI('l', "?25");
+        return this;
+    }
+
+    /**
+     * Make cursor visible
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator cursor_visible() {
+        createCSI('h', "?25");
         return this;
     }
 
@@ -1254,7 +1275,8 @@ public class ANSI_Escape_Code_Creator {
     }
 
     /**
-     * Convert a string to an escaped string using octal representation for non-printable characters
+     * <p>Convert a string to an escaped string using octal representation for non-printable characters</p>
+     * <p>It is not recommended to use this function with shorten_codes set to true</p>
      * @param source String to escape
      * @param shorten_codes Whether to exclude leading 0's
      * @return Escaped string

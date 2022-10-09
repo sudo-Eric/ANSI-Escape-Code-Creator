@@ -11,4 +11,5 @@ Please read the JavaDoc.
 ## External Documentation
 ### Wikipedia
 * [ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code)
+### Christian Petersen GitHub Gist
 * [ANSI Escape Sequences](https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797)
