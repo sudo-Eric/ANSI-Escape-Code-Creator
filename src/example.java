@@ -1,6 +1,8 @@
 import ANSI_Escape_Code_Creator.ANSI_Escape_Code_Creator;
 import static ANSI_Escape_Code_Creator.ANSI_Escape_Code_Creator_Static.*;
 
+import TextBasedGame.App;
+
 /**
  * Class containing example code/uses for ANSI escape codes
  */
@@ -14,7 +16,8 @@ public class example {
     public static void main(String[] args) throws InterruptedException {
 //        demo1();
 //        demo2();
-        demo3();
+//        demo3();
+        App.main(null);
     }
 
     private static void demo1() throws InterruptedException {

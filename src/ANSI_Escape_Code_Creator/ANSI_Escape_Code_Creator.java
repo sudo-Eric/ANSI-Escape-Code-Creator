@@ -276,6 +276,12 @@ public class ANSI_Escape_Code_Creator {
         return this;
     }
 
+    private void createCSI(char C) {
+        if (this._SGR)
+            this.end_SGR();
+        this.command.append(CSI).append(C);
+    }
+
     private void createCSI(char C, String n) {
         if (this._SGR)
             this.end_SGR();
@@ -420,11 +426,63 @@ public class ANSI_Escape_Code_Creator {
     }
 
     /**
+     * <p>Cursor scroll up</p>
+     * <p>Moves cursor one line up, scrolling if needed</p>
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator cursor_scroll_up() {
+        if (this._SGR)
+            this.end_SGR();
+        this.command.append("\033M");
+        return this;
+    }
+
+    /**
+     * save cursor position (DEC) Device Control String
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator cursor_save_position_DEC() {
+        if (this._SGR)
+            this.end_SGR();
+        this.command.append("\0337");
+        return this;
+    }
+
+    /**
+     * restores the cursor to the last saved position (DEC) Device Control String
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator cursor_restore_position_DEC() {
+        if (this._SGR)
+            this.end_SGR();
+        this.command.append("\0338");
+        return this;
+    }
+
+    /**
+     * save cursor position (OSC) Operating System Command
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator cursor_save_position_OSC() {
+        createCSI('s');
+        return this;
+    }
+
+    /**
+     * restores the cursor to the last saved position (SCO) Operating System Command
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator cursor_restore_position_OSC() {
+        createCSI('u');
+        return this;
+    }
+
+    /**
      * <p>Erase part or the entirety of the display</p>
      * <p>n = 0 | clear from cursor to end of screen<br>
      * n = 1 | clear from cursor to beginning of the screen<br>
      * n = 2 | clear entire screen<br>
-     * n = 3 | clear entire screen and delete all lines saved in the scrollback buffer</p>
+     * n = 3 | delete all lines saved in the scrollback buffer</p>
      * @param n Erasure mode
      * @return Self reference
      */

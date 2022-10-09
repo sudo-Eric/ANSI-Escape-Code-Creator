@@ -260,11 +260,47 @@ public class ANSI_Escape_Code_Creator_Static {
     }
 
     /**
+     * <p>Cursor scroll up</p>
+     * <p>Moves cursor one line up, scrolling if needed</p>
+     */
+    public static void cursor_scroll_up() {
+        System.out.print("\033M");
+    }
+
+    /**
+     * save cursor position (DEC) Device Control String
+     */
+    public static void cursor_save_position_DEC() {
+        System.out.print("\0337");
+    }
+
+    /**
+     * restores the cursor to the last saved position (DEC) Device Control String
+     */
+    public static void cursor_restore_position_DEC() {
+        System.out.print("\0338");
+    }
+
+    /**
+     * save cursor position (OSC) Operating System Command
+     */
+    public static void cursor_save_position_OSC() {
+        System.out.print(CSI + 's');
+    }
+
+    /**
+     * restores the cursor to the last saved position (SCO) Operating System Command
+     */
+    public static void cursor_restore_position_OSC() {
+        System.out.print(CSI + 'u');
+    }
+
+    /**
      * <p>Erase part or the entirety of the display</p>
      * <p>n = 0 | clear from cursor to end of screen<br>
      * n = 1 | clear from cursor to beginning of the screen<br>
      * n = 2 | clear entire screen<br>
-     * n = 3 | clear entire screen and delete all lines saved in the scrollback buffer</p>
+     * n = 3 | delete all lines saved in the scrollback buffer</p>
      * @param n Erasure mode
      */
     public static void erase_display(int n) {
