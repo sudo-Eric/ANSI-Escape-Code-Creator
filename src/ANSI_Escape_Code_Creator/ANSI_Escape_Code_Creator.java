@@ -440,6 +440,7 @@ public class ANSI_Escape_Code_Creator {
     /**
      * <p>Save cursor position</p>
      * <p>Save cursor position (DEC) Device Control String</p>
+     * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_save_position_DEC() {
         if (this._SGR)
