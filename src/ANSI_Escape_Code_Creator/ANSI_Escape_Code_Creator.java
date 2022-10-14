@@ -179,6 +179,42 @@ public class ANSI_Escape_Code_Creator {
     }
 
     /**
+     * Append a long
+     * @param lng Long to be appended
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator append(long lng) {
+        if (this._SGR)
+            this.end_SGR();
+        this.command.append(lng);
+        return this;
+    }
+
+    /**
+     * Append a float
+     * @param flt Float to be appended
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator append(float flt) {
+        if (this._SGR)
+            this.end_SGR();
+        this.command.append(flt);
+        return this;
+    }
+
+    /**
+     * Append a double
+     * @param dub Double to be appended
+     * @return Self reference
+     */
+    public ANSI_Escape_Code_Creator append(double dub) {
+        if (this._SGR)
+            this.end_SGR();
+        this.command.append(dub);
+        return this;
+    }
+
+    /**
      * <p>Bell</p>
      * <p>This will trigger the ASCII bell.</p>
      * <ul>
