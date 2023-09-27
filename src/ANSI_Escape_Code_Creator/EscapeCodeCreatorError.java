@@ -1,5 +1,9 @@
 package ANSI_Escape_Code_Creator;
 
+/**
+ * @author Eric Heinke (sudo-Eric)
+ * @version 1.2.2
+ */
 @SuppressWarnings("unused")
 public class EscapeCodeCreatorError extends RuntimeException {
     private static final long serialVersionUID = 4056768650584583722L;
@@ -25,6 +29,10 @@ public class EscapeCodeCreatorError extends RuntimeException {
     }
 }
 
+/**
+ * @author Eric Heinke (sudo-Eric)
+ * @version 1.2.2
+ */
 @SuppressWarnings("unused")
 class EscapeCodeColorError extends EscapeCodeCreatorError {
     private static final long serialVersionUID = -7268100203238610224L;
@@ -50,6 +58,10 @@ class EscapeCodeColorError extends EscapeCodeCreatorError {
     }
 }
 
+/**
+ * @author Eric Heinke (sudo-Eric)
+ * @version 1.2.2
+ */
 @SuppressWarnings("unused")
 class EscapeCodeColorModeError extends EscapeCodeCreatorError {
     private static final long serialVersionUID = -7268100203238610224L;
