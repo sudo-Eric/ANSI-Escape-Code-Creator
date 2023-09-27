@@ -6,8 +6,9 @@ import java.util.HashMap;
  * A set of static functions to print ANSI escape codes for program use
  *
  * @author Eric Heinke (sudo-Eric)
- * @version 1.2.0
+ * @version 1.2.2
  */
+@SuppressWarnings({"unused", "UseOfSystemOutOrSystemErr"})
 public class ANSI_Escape_Code_Creator_Static {
     /**
      * 4-bit color mode
@@ -27,46 +28,54 @@ public class ANSI_Escape_Code_Creator_Static {
     /**
      * Map foreground color names to color code
      */
-    private static final HashMap<String, Integer> _4bit_colors_foreground = new HashMap<>() {{
-        put("Black", 30);
-        put("Red", 31);
-        put("Green", 32);
-        put("Yellow", 33);
-        put("Blue", 34);
-        put("Magenta", 35);
-        put("Cyan", 36);
-        put("White", 37);
-        put("Bright Black", 90);
-        put("Bright Red", 91);
-        put("Bright Green", 92);
-        put("Bright Yellow", 93);
-        put("Bright Blue", 94);
-        put("Bright Magenta", 95);
-        put("Bright Cyan", 96);
-        put("Bright White", 97);
-    }};
+    private static final HashMap<String, Integer> _4bit_colors_foreground = new HashMap<String, Integer>() {
+        private static final long serialVersionUID = -5643778366800458886L;
+
+        {
+            put("Black", 30);
+            put("Red", 31);
+            put("Green", 32);
+            put("Yellow", 33);
+            put("Blue", 34);
+            put("Magenta", 35);
+            put("Cyan", 36);
+            put("White", 37);
+            put("Bright Black", 90);
+            put("Bright Red", 91);
+            put("Bright Green", 92);
+            put("Bright Yellow", 93);
+            put("Bright Blue", 94);
+            put("Bright Magenta", 95);
+            put("Bright Cyan", 96);
+            put("Bright White", 97);
+        }
+    };
 
     /**
      * Map background color names to color code
      */
-    private static final HashMap<String, Integer> _4bit_colors_background = new HashMap<>() {{
-        put("Black", 40);
-        put("Red", 41);
-        put("Green", 42);
-        put("Yellow", 43);
-        put("Blue", 44);
-        put("Magenta", 45);
-        put("Cyan", 46);
-        put("White", 47);
-        put("Bright Black", 100);
-        put("Bright Red", 101);
-        put("Bright Green", 102);
-        put("Bright Yellow", 103);
-        put("Bright Blue", 104);
-        put("Bright Magenta", 105);
-        put("Bright Cyan", 106);
-        put("Bright White", 107);
-    }};
+    private static final HashMap<String, Integer> _4bit_colors_background = new HashMap<String, Integer>() {
+        private static final long serialVersionUID = -7209193107433740810L;
+
+        {
+            put("Black", 40);
+            put("Red", 41);
+            put("Green", 42);
+            put("Yellow", 43);
+            put("Blue", 44);
+            put("Magenta", 45);
+            put("Cyan", 46);
+            put("White", 47);
+            put("Bright Black", 100);
+            put("Bright Red", 101);
+            put("Bright Green", 102);
+            put("Bright Yellow", 103);
+            put("Bright Blue", 104);
+            put("Bright Magenta", 105);
+            put("Bright Cyan", 106);
+            put("Bright White", 107);
+        }
+    };
 
     /**
      * Control Sequence Introducer (SCI)
@@ -161,8 +170,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param lines Number of lines to move
      */
     public static void cursor_up(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             System.out.print(CSI + lines + 'A');
+        }
     }
 
     /**
@@ -176,8 +186,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param lines Number of lines to move down
      */
     public static void cursor_down(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             System.out.print(CSI + lines + 'B');
+        }
     }
 
     /**
@@ -191,8 +202,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param lines Number of lines to move right
      */
     public static void cursor_forward(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             System.out.print(CSI + lines + 'C');
+        }
     }
 
     /**
@@ -206,8 +218,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param lines Number of lines to move left
      */
     public static void cursor_back(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             System.out.print(CSI + lines + 'D');
+        }
     }
 
     /**
@@ -221,8 +234,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param lines Number of lines to move
      */
     public static void cursor_next_line(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             System.out.print(CSI + lines + 'E');
+        }
     }
 
     /**
@@ -236,8 +250,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param lines Number of lines to move
      */
     public static void cursor_previous_line(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             System.out.print(CSI + lines + 'F');
+        }
     }
 
     /**
@@ -245,8 +260,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param column Column to move to
      */
     public static void cursor_horizontal_absolute(int column) {
-        if (column > -1)
+        if (column > -1) {
             System.out.print(CSI + column + 'G');
+        }
     }
 
     /**
@@ -255,8 +271,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param column Column to move to
      */
     public static void cursor_position(int row, int column) {
-        if (row > -1 && column > -1)
+        if (row > -1 && column > -1) {
             System.out.print(CSI + row + ';' + column + 'H');
+        }
     }
 
     /**
@@ -322,8 +339,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param n Erasure mode
      */
     public static void erase_display(int n) {
-        if (n > -1 && n < 4)
+        if (n > -1 && n < 4) {
             System.out.print(CSI + n + 'J');
+        }
     }
 
     /**
@@ -341,8 +359,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param n Erasure mode
      */
     public static void erase_line(int n) {
-        if (n > -1 && n < 3)
+        if (n > -1 && n < 3) {
             System.out.print(CSI + n + 'K');
+        }
     }
 
     /**
@@ -365,8 +384,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param lines Number of lines to move
      */
     public static void scroll_up(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             System.out.print(CSI + lines + 'S');
+        }
     }
 
     /**
@@ -382,8 +402,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param lines Number of lines to move
      */
     public static void scroll_down(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             System.out.print(CSI + lines + 'T');
+        }
     }
 
     /**
@@ -518,8 +539,9 @@ public class ANSI_Escape_Code_Creator_Static {
      * @param n Font number
      */
     public static void SGR_alternative_font(int n) {
-        if (n > 0 && n < 10)
+        if (n > 0 && n < 10) {
             System.out.print(CSI + (n+10) + SGR);
+        }
     }
 
     /**
@@ -598,13 +620,15 @@ public class ANSI_Escape_Code_Creator_Static {
         if (colorMode == _4BIT_COLOR) {
             if ((color > 29 && color < 38) || (color > 89 && color < 98)) {
                 System.out.print(CSI + color + SGR);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else if (colorMode == _8BIT_COLOR) {
             if (color > -1 && color < 256) {
                 System.out.print(CSI + "38;5;" + color + SGR);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else {
             System.out.print(CSI + "38;2;" +
                     ((color >> 16) & 0xFF) + ';' +
@@ -622,14 +646,17 @@ public class ANSI_Escape_Code_Creator_Static {
     public static void SGR_set_foreground_color(String color, int colorMode) {
         if (colorMode == _4BIT_COLOR) {
             Integer c = _4bit_colors_foreground.get(color);
-            if (c != null)
-                System.out.print(CSI + c + SGR);
+            if (c == null) {
+                throw new EscapeCodeColorError("Not a valid color name '" + color + "'");
+            }
+            System.out.print(CSI + c + SGR);
         } else if (colorMode == _8BIT_COLOR) {
-            System.out.println("ERROR: 8-bit color can not be set by string");
+            throw new EscapeCodeColorModeError("8-bit color can not be set by string");
         } else {
             if (color.length() == 7) {
-                if (color.charAt(0) == '#')
+                if (color.charAt(0) == '#') {
                     color = color.substring(1);
+                }
             }
             if (color.length() == 6) {
                 try {
@@ -640,10 +667,10 @@ public class ANSI_Escape_Code_Creator_Static {
                             ((c >> 8) & 0xFF) + ';' +
                             (c & 0xFF) + SGR);
                 } catch (NumberFormatException e) {
-                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                    throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
                 }
             } else {
-                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
             }
         }
     }
@@ -664,10 +691,11 @@ public class ANSI_Escape_Code_Creator_Static {
                         (g & 0xFF) + ';' +
                         (b & 0xFF) + SGR);
             }
-            else
-                System.out.println("ERROR: Color values must be in range 0-255");
+            else {
+                throw new EscapeCodeColorError("Color values must be in range 0-255");
+            }
         } else {
-            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+            throw new EscapeCodeColorModeError("Color mode must be 24-bit for setting RGB color values");
         }
     }
 
@@ -688,13 +716,15 @@ public class ANSI_Escape_Code_Creator_Static {
         if (colorMode == _4BIT_COLOR) {
             if ((color > 39 && color < 48) || (color > 99 && color < 108)) {
                 System.out.print(CSI + color + SGR);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else if (colorMode == _8BIT_COLOR) {
             if (color > -1 && color < 256) {
                 System.out.print(CSI + "48;5;" + color + SGR);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else {
             System.out.print(CSI + "48;2;" +
                     ((color >> 16) & 0xFF) + ';' +
@@ -712,14 +742,17 @@ public class ANSI_Escape_Code_Creator_Static {
     public static void SGR_set_background_color(String color, int colorMode) {
         if (colorMode == _4BIT_COLOR) {
             Integer c = _4bit_colors_background.get(color);
-            if (c != null)
-                System.out.print(CSI + c + SGR);
+            if (c == null) {
+                throw new EscapeCodeColorError("Not a valid color name '" + color + "'");
+            }
+            System.out.print(CSI + c + SGR);
         } else if (colorMode == _8BIT_COLOR) {
-            System.out.println("ERROR: 8-bit color can not be set by string");
+            throw new EscapeCodeColorModeError("8-bit color can not be set by string");
         } else {
             if (color.length() == 7) {
-                if (color.charAt(0) == '#')
+                if (color.charAt(0) == '#') {
                     color = color.substring(1);
+                }
             }
             if (color.length() == 6) {
                 try {
@@ -730,10 +763,10 @@ public class ANSI_Escape_Code_Creator_Static {
                             ((c >> 8) & 0xFF) + ';' +
                             (c & 0xFF) + SGR);
                 } catch (NumberFormatException e) {
-                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                    throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
                 }
             } else {
-                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
             }
         }
     }
@@ -754,10 +787,11 @@ public class ANSI_Escape_Code_Creator_Static {
                         (g & 0xFF) + ';' +
                         (b & 0xFF) + SGR);
             }
-            else
-                System.out.println("ERROR: Color values must be in range 0-255");
+            else {
+                throw new EscapeCodeColorError("Color values must be in range 0-255");
+            }
         } else {
-            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+            throw new EscapeCodeColorModeError("Color mode must be 24-bit for setting RGB color values");
         }
     }
 
@@ -790,12 +824,13 @@ public class ANSI_Escape_Code_Creator_Static {
      */
     public static void SGR_set_underline_color(int color, int colorMode) {
         if (colorMode == _4BIT_COLOR) {
-            System.out.println("ERROR: Underline color does not support 4-bit color");
+            throw new EscapeCodeColorModeError("Underline color does not support 4-bit color");
         } else if (colorMode == _8BIT_COLOR) {
             if (color > -1 && color < 256) {
                 System.out.print(CSI + "58;5;" + color + SGR);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else {
             System.out.print(CSI + "58;2;" +
                     ((color >> 16) & 0xFF) + ';' +
@@ -812,26 +847,27 @@ public class ANSI_Escape_Code_Creator_Static {
      */
     public static void SGR_set_underline_color(String color, int colorMode) {
         if (colorMode == _4BIT_COLOR) {
-            System.out.println("ERROR: Underline color does not support 4-bit color");
+            throw new EscapeCodeColorModeError("Underline color does not support 4-bit color");
         } else if (colorMode == _8BIT_COLOR) {
-            System.out.println("ERROR: 8-bit color can not be set by string");
+            throw new EscapeCodeColorModeError("8-bit color can not be set by string");
         } else {
             if (color.length() == 7) {
-                if (color.charAt(0) == '#')
+                if (color.charAt(0) == '#') {
                     color = color.substring(1);
+                }
             }
             if (color.length() == 6) {
                 try {
                     int c = Integer.parseInt(color, 16);
-                    System.out.print(CSI + "48;2;" +
+                    System.out.print(CSI + "58;2;" +
                             ((c >> 16) & 0xFF) + ';' +
                             ((c >> 8) & 0xFF) + ';' +
                             (c & 0xFF) + SGR);
                 } catch (NumberFormatException e) {
-                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                    throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
                 }
             } else {
-                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
             }
         }
     }
@@ -847,15 +883,16 @@ public class ANSI_Escape_Code_Creator_Static {
     public static void SGR_set_underline_color(int r, int g, int b, int colorMode) {
         if (colorMode == _24BIT_COLOR) {
             if (r > -1 && g > -1 && b > -1 && r < 256 && g < 256 && b < 256) {
-                System.out.print(CSI + "48;2;" +
+                System.out.print(CSI + "58;2;" +
                         (r & 0xFF) + ';' +
                         (g & 0xFF) + ';' +
                         (b & 0xFF) + SGR);
             }
-            else
-                System.out.println("ERROR: Color values must be in range 0-255");
+            else {
+                throw new EscapeCodeColorError("Color values must be in range 0-255");
+            }
         } else {
-            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+            throw new EscapeCodeColorModeError("Color mode must be 24-bit for setting RGB color values");
         }
     }
 

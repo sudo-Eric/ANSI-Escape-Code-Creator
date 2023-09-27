@@ -6,8 +6,9 @@ import java.util.HashMap;
  * A class to aid in the creation of strings that use ANSI escape codes
  *
  * @author Eric Heinke (sudo-Eric)
- * @version 1.2.0
+ * @version 1.2.2
  */
+@SuppressWarnings("unused")
 public class ANSI_Escape_Code_Creator {
     /**
      * 4-bit color mode
@@ -27,46 +28,54 @@ public class ANSI_Escape_Code_Creator {
     /**
      * Map foreground color names to color code
      */
-    private static final HashMap<String, Integer> _4bit_colors_foreground = new HashMap<>() {{
-        put("Black", 30);
-        put("Red", 31);
-        put("Green", 32);
-        put("Yellow", 33);
-        put("Blue", 34);
-        put("Magenta", 35);
-        put("Cyan", 36);
-        put("White", 37);
-        put("Bright Black", 90);
-        put("Bright Red", 91);
-        put("Bright Green", 92);
-        put("Bright Yellow", 93);
-        put("Bright Blue", 94);
-        put("Bright Magenta", 95);
-        put("Bright Cyan", 96);
-        put("Bright White", 97);
-    }};
+    private static final HashMap<String, Integer> _4bit_colors_foreground = new HashMap<String, Integer>() {
+        private static final long serialVersionUID = 1308308999398579339L;
+
+        {
+            put("Black", 30);
+            put("Red", 31);
+            put("Green", 32);
+            put("Yellow", 33);
+            put("Blue", 34);
+            put("Magenta", 35);
+            put("Cyan", 36);
+            put("White", 37);
+            put("Bright Black", 90);
+            put("Bright Red", 91);
+            put("Bright Green", 92);
+            put("Bright Yellow", 93);
+            put("Bright Blue", 94);
+            put("Bright Magenta", 95);
+            put("Bright Cyan", 96);
+            put("Bright White", 97);
+        }
+    };
 
     /**
      * Map background color names to color code
      */
-    private static final HashMap<String, Integer> _4bit_colors_background = new HashMap<>() {{
-        put("Black", 40);
-        put("Red", 41);
-        put("Green", 42);
-        put("Yellow", 43);
-        put("Blue", 44);
-        put("Magenta", 45);
-        put("Cyan", 46);
-        put("White", 47);
-        put("Bright Black", 100);
-        put("Bright Red", 101);
-        put("Bright Green", 102);
-        put("Bright Yellow", 103);
-        put("Bright Blue", 104);
-        put("Bright Magenta", 105);
-        put("Bright Cyan", 106);
-        put("Bright White", 107);
-    }};
+    private static final HashMap<String, Integer> _4bit_colors_background = new HashMap<String, Integer>() {
+        private static final long serialVersionUID = -8723803463655799231L;
+
+        {
+            put("Black", 40);
+            put("Red", 41);
+            put("Green", 42);
+            put("Yellow", 43);
+            put("Blue", 44);
+            put("Magenta", 45);
+            put("Cyan", 46);
+            put("White", 47);
+            put("Bright Black", 100);
+            put("Bright Red", 101);
+            put("Bright Green", 102);
+            put("Bright Yellow", 103);
+            put("Bright Blue", 104);
+            put("Bright Magenta", 105);
+            put("Bright Cyan", 106);
+            put("Bright White", 107);
+        }
+    };
 
     /**
      * Control Sequence Introducer (SCI)
@@ -114,8 +123,9 @@ public class ANSI_Escape_Code_Creator {
      */
     @Override
     public String toString() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         return this.command.toString();
     }
 
@@ -124,8 +134,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Escaped generated string
      */
     public String toEscapedString() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         return toPrintableRepresentation(this.toString(), this.escape_mode, this.shorten_codes);
     }
 
@@ -135,10 +146,11 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator setColorMode(int mode) {
-        if (mode == _4BIT_COLOR || mode == _8BIT_COLOR || mode == _24BIT_COLOR)
+        if (mode == _4BIT_COLOR || mode == _8BIT_COLOR || mode == _24BIT_COLOR) {
             this.colorMode = mode;
-        else
+        } else {
             System.out.println("ERROR: Invalid color mode.\nValid color modes are 4, 8, and 24");
+        }
         return this;
     }
 
@@ -148,8 +160,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator append(String str) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(str);
         return this;
     }
@@ -160,8 +173,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator append(char chr) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(chr);
         return this;
     }
@@ -172,8 +186,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator append(int integer) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(integer);
         return this;
     }
@@ -184,8 +199,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator append(long lng) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(lng);
         return this;
     }
@@ -196,8 +212,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator append(float flt) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(flt);
         return this;
     }
@@ -208,8 +225,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator append(double dub) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(dub);
         return this;
     }
@@ -225,8 +243,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator bell() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\7");
         return this;
     }
@@ -238,8 +257,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator backspace() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\10");
         return this;
     }
@@ -251,8 +271,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator tab() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\11");
         return this;
     }
@@ -265,8 +286,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator line_feed() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\12");
         return this;
     }
@@ -280,8 +302,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator form_feed() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\14");
         return this;
     }
@@ -293,8 +316,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator carriage_return() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\15");
         return this;
     }
@@ -306,27 +330,31 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator escape() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\33");
         return this;
     }
 
     private void createCSI(char C) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(CSI).append(C);
     }
 
     private void createCSI(char C, String n) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(CSI).append(n).append(C);
     }
 
     private void createCSI(char C, String n, String m) {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append(CSI).append(n).append(';').append(m).append(C);
     }
 
@@ -343,8 +371,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_up(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             createCSI('A', Integer.toString(lines));
+        }
         return this;
     }
 
@@ -361,8 +390,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_down(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             createCSI('B', Integer.toString(lines));
+        }
         return this;
     }
 
@@ -379,8 +409,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_forward(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             createCSI('C', Integer.toString(lines));
+        }
         return this;
     }
 
@@ -397,8 +428,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_back(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             createCSI('D', Integer.toString(lines));
+        }
         return this;
     }
 
@@ -415,8 +447,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_next_line(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             createCSI('E', Integer.toString(lines));
+        }
         return this;
     }
 
@@ -433,8 +466,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_previous_line(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             createCSI('F', Integer.toString(lines));
+        }
         return this;
     }
 
@@ -444,8 +478,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_horizontal_absolute(int column) {
-        if (column > -1)
+        if (column > -1) {
             createCSI('G', Integer.toString(column));
+        }
         return this;
     }
 
@@ -456,8 +491,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_position(int row, int column) {
-        if (row > -1 && column > -1)
+        if (row > -1 && column > -1) {
             createCSI('H', Integer.toString(row), Integer.toString(column));
+        }
         return this;
     }
 
@@ -467,8 +503,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_scroll_up() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\033M");
         return this;
     }
@@ -479,8 +516,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_save_position_DEC() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\0337");
         return this;
     }
@@ -491,8 +529,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator cursor_restore_position_DEC() {
-        if (this._SGR)
+        if (this._SGR) {
             this.end_SGR();
+        }
         this.command.append("\0338");
         return this;
     }
@@ -545,8 +584,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator erase_display(int n) {
-        if (n > -1 && n < 4)
+        if (n > -1 && n < 4) {
             createCSI('J', Integer.toString(n));
+        }
         return this;
     }
 
@@ -567,8 +607,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator erase_line(int n) {
-        if (n > -1 && n < 3)
+        if (n > -1 && n < 3) {
             createCSI('K', Integer.toString(n));
+        }
         return this;
     }
 
@@ -593,8 +634,9 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator scroll_up(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             createCSI('S', Integer.toString(lines));
+        }
         return this;
     }
 
@@ -611,16 +653,18 @@ public class ANSI_Escape_Code_Creator {
      * @return Self reference
      */
     public ANSI_Escape_Code_Creator scroll_down(int lines) {
-        if (lines > -1)
+        if (lines > -1) {
             createCSI('T', Integer.toString(lines));
+        }
         return this;
     }
 
     private void begin_SGR() {
-        if (this._SGR)
+        if (this._SGR) {
             this.command.append(";");
-        else
+        } else {
             this.command.append(CSI);
+        }
         this._SGR = true;
     }
 
@@ -903,14 +947,16 @@ public class ANSI_Escape_Code_Creator {
             if ((color > 29 && color < 38) || (color > 89 && color < 98)) {
                 this.begin_SGR();
                 this.command.append(color);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else if (this.colorMode == _8BIT_COLOR) {
             if (color > -1 && color < 256) {
                 this.begin_SGR();
                 this.command.append("38;5;").append(color);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else {
             this.begin_SGR();
             this.command.append("38;2;").append((color >> 16) & 0xFF).append(';')
@@ -930,14 +976,17 @@ public class ANSI_Escape_Code_Creator {
         if (this.colorMode == _4BIT_COLOR) {
             this.begin_SGR();
             Integer c = _4bit_colors_foreground.get(color);
-            if (c != null)
-                this.command.append(c);
+            if (c == null) {
+                throw new EscapeCodeColorError("Not a valid color name '" + color + "'");
+            }
+            this.command.append(c);
         } else if (this.colorMode == _8BIT_COLOR) {
-            System.out.println("ERROR: 8-bit color can not be set by string");
+            throw new EscapeCodeColorModeError("8-bit color can not be set by string");
         } else {
             if (color.length() == 7) {
-                if (color.charAt(0) == '#')
+                if (color.charAt(0) == '#') {
                     color = color.substring(1);
+                }
             }
             if (color.length() == 6) {
                 try {
@@ -947,10 +996,10 @@ public class ANSI_Escape_Code_Creator {
                             .append((c >> 8) & 0xFF).append(';')
                             .append(c & 0xFF);
                 } catch (NumberFormatException e) {
-                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                    throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
                 }
             } else {
-                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
             }
         }
         return this;
@@ -972,10 +1021,11 @@ public class ANSI_Escape_Code_Creator {
                         .append(g & 0xFF).append(';')
                         .append(b & 0xFF);
             }
-            else
-                System.out.println("ERROR: Color values must be in range 0-255");
+            else {
+                throw new EscapeCodeColorError("Color values must be in range 0-255");
+            }
         } else {
-            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+            throw new EscapeCodeColorModeError("Color mode must be 24-bit for setting RGB color values");
         }
         return this;
     }
@@ -1001,14 +1051,16 @@ public class ANSI_Escape_Code_Creator {
             if ((color > 39 && color < 48) || (color > 99 && color < 108)) {
                 this.begin_SGR();
                 this.command.append(color);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else if (this.colorMode == _8BIT_COLOR) {
             if (color > -1 && color < 256) {
                 this.begin_SGR();
                 this.command.append("48;5;").append(color);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else {
             this.begin_SGR();
             this.command.append("48;2;").append((color >> 16) & 0xFF).append(';')
@@ -1028,14 +1080,17 @@ public class ANSI_Escape_Code_Creator {
         if (this.colorMode == _4BIT_COLOR) {
             this.begin_SGR();
             Integer c = _4bit_colors_background.get(color);
-            if (c != null)
-                this.command.append(c);
+            if (c == null) {
+                throw new EscapeCodeColorError("Not a valid color name '" + color + "'");
+            }
+            this.command.append(c);
         } else if (this.colorMode == _8BIT_COLOR) {
-            System.out.println("ERROR: 8-bit color can not be set by string");
+            throw new EscapeCodeColorModeError("8-bit color can not be set by string");
         } else {
             if (color.length() == 7) {
-                if (color.charAt(0) == '#')
+                if (color.charAt(0) == '#') {
                     color = color.substring(1);
+                }
             }
             if (color.length() == 6) {
                 try {
@@ -1045,10 +1100,10 @@ public class ANSI_Escape_Code_Creator {
                             .append((c >> 8) & 0xFF).append(';')
                             .append(c & 0xFF);
                 } catch (NumberFormatException e) {
-                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                    throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
                 }
             } else {
-                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
             }
         }
         return this;
@@ -1070,10 +1125,11 @@ public class ANSI_Escape_Code_Creator {
                         .append(g & 0xFF).append(';')
                         .append(b & 0xFF);
             }
-            else
-                System.out.println("ERROR: Color values must be in range 0-255");
+            else {
+                throw new EscapeCodeColorError("Color values must be in range 0-255");
+            }
         } else {
-            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+            throw new EscapeCodeColorModeError("Color mode must be 24-bit for setting RGB color values");
         }
         return this;
     }
@@ -1116,13 +1172,14 @@ public class ANSI_Escape_Code_Creator {
      */
     public ANSI_Escape_Code_Creator SGR_set_underline_color(int color) {
         if (this.colorMode == _4BIT_COLOR) {
-            System.out.println("ERROR: Underline color does not support 4-bit color");
+            throw new EscapeCodeColorModeError("Underline color does not support 4-bit color");
         } else if (this.colorMode == _8BIT_COLOR) {
             if (color > -1 && color < 256) {
                 this.begin_SGR();
                 this.command.append("58;5;").append(color);
-            } else
-                System.out.println("ERROR: Unknown color " + color);
+            } else {
+                throw new EscapeCodeColorError("Unknown color " + color);
+            }
         } else {
             this.begin_SGR();
             this.command.append("58;2;").append((color >> 16) & 0xFF).append(';')
@@ -1140,13 +1197,14 @@ public class ANSI_Escape_Code_Creator {
      */
     public ANSI_Escape_Code_Creator SGR_set_underline_color(String color) {
         if (this.colorMode == _4BIT_COLOR) {
-            System.out.println("ERROR: Underline color does not support 4-bit color");
+            throw new EscapeCodeColorModeError("Underline color does not support 4-bit color");
         } else if (this.colorMode == _8BIT_COLOR) {
-            System.out.println("ERROR: 8-bit color can not be set by string");
+            throw new EscapeCodeColorModeError("8-bit color can not be set by string");
         } else {
             if (color.length() == 7) {
-                if (color.charAt(0) == '#')
+                if (color.charAt(0) == '#') {
                     color = color.substring(1);
+                }
             }
             if (color.length() == 6) {
                 try {
@@ -1156,10 +1214,10 @@ public class ANSI_Escape_Code_Creator {
                             .append((c >> 8) & 0xFF).append(';')
                             .append(c & 0xFF);
                 } catch (NumberFormatException e) {
-                    System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                    throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
                 }
             } else {
-                System.out.println("ERROR: Not a valid hex color '" + color + "'");
+                throw new EscapeCodeColorError("Not a valid hex color '" + color + "'");
             }
         }
         return this;
@@ -1181,10 +1239,11 @@ public class ANSI_Escape_Code_Creator {
                         .append(g & 0xFF).append(';')
                         .append(b & 0xFF);
             }
-            else
-                System.out.println("ERROR: Color values must be in range 0-255");
+            else {
+                throw new EscapeCodeColorError("Color values must be in range 0-255");
+            }
         } else {
-            System.out.println("ERROR: Color mode must be 24-bit for setting RGB color values");
+            throw new EscapeCodeColorModeError("Color mode must be 24-bit for setting RGB color values");
         }
         return this;
     }
@@ -1239,12 +1298,13 @@ public class ANSI_Escape_Code_Creator {
     private static final char[] HEX_DIGITS = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
     private static String toPrintableRepresentation(String source, String mode, boolean shorten_codes) {
-        if (mode.equals("HEX"))
+        if (mode.equals("HEX")) {
             return toPrintableRepresentationHex(source, shorten_codes);
-        else if (mode.equals("OCT"))
+        } else if (mode.equals("OCT")) {
             return toPrintableRepresentationOctal(source, shorten_codes);
-        else
+        } else {
             return source;
+        }
     }
 
     /**
@@ -1255,8 +1315,9 @@ public class ANSI_Escape_Code_Creator {
      */
     private static String toPrintableRepresentationHex(String source, boolean shorten_codes) {
 
-        if( source == null ) return null;
-        else {
+        if( source == null ) {
+            return null;
+        } else {
 
             final StringBuilder sb = new StringBuilder();
             final int limit = source.length();
@@ -1280,13 +1341,15 @@ public class ANSI_Escape_Code_Creator {
                     case '\\': sb.append("\\\\"); break;
 
                     default:
-                        if( CONTROL_LIMIT <= ch && ch <= PRINTABLE_LIMIT ) sb.append((char)ch);
-                        else {
+                        if( CONTROL_LIMIT <= ch && ch <= PRINTABLE_LIMIT ) {
+                            sb.append((char)ch);
+                        } else {
 
                             sb.append("\\u");
 
-                            if( hexbuf == null )
+                            if( hexbuf == null ) {
                                 hexbuf = new char[4];
+                            }
 
                             for( int offs = 4; offs > 0; ) {
 
@@ -1297,8 +1360,9 @@ public class ANSI_Escape_Code_Creator {
                             int offs = 0;
                             if (shorten_codes) {
                                 for (; offs < hexbuf.length; offs++) {
-                                    if (hexbuf[offs] != '0')
+                                    if (hexbuf[offs] != '0') {
                                         break;
+                                    }
                                 }
                             }
 
@@ -1320,8 +1384,9 @@ public class ANSI_Escape_Code_Creator {
      */
     private static String toPrintableRepresentationOctal(String source, boolean shorten_codes) {
 
-        if( source == null ) return null;
-        else {
+        if( source == null ) {
+            return null;
+        } else {
 
             final StringBuilder sb = new StringBuilder();
             final int limit = source.length();
@@ -1345,8 +1410,9 @@ public class ANSI_Escape_Code_Creator {
                     case '\\': sb.append("\\\\"); break;
 
                     default:
-                        if( CONTROL_LIMIT <= ch && ch <= PRINTABLE_LIMIT ) sb.append((char)ch);
-                        else {
+                        if( CONTROL_LIMIT <= ch && ch <= PRINTABLE_LIMIT ) {
+                            sb.append((char)ch);
+                        } else {
                             octbuf = Integer.toOctalString(ch);
                             if (octbuf.length() < 4) {
                                 sb.append("\\");
@@ -1354,12 +1420,12 @@ public class ANSI_Escape_Code_Creator {
                                     sb.append(octbuf);
                                 }
                                 else {
-                                    sb.append("0".repeat(3 - octbuf.length()));
+                                    sb.append(new String(new char[3 - octbuf.length()]).replace("\0", "0"));
                                     sb.append(octbuf);
                                 }
                             }
                             else {
-                                octbuf = toPrintableRepresentationHex(Character.toString(ch), shorten_codes);
+                                octbuf = toPrintableRepresentationHex(Character.toString((char)ch), shorten_codes);
                                 sb.append(octbuf, 1, octbuf.length()-1);
                             }
                         }
